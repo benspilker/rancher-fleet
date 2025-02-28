@@ -1,4 +1,11 @@
-apiVersion: helm.fluxcd.io/v1
+# namespace.yaml (part of the combined file)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nextcloud2
+---
+# helmrelease.yaml (part of the combined file)
+apiVersion: helm.toolkit.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: nextcloud
@@ -6,12 +13,12 @@ metadata:
 spec:
   chart:
     name: nextcloud
-    version: "22.0.0"  # Use the desired version
+    version: "22.0.0"
     repository: https://nextcloud.github.io/helm/
   values:
     persistence:
       enabled: true
-      size: 5Gi  # Adjust the size as needed
+      existingClaim: nextcloud2-pvc
     ingress:
       enabled: true
       annotations:
@@ -25,3 +32,26 @@ spec:
         - secretName: nextcloud2-tls
           hosts:
             - nextcloud2.yourexampledomain.com
+---
+# ingress.yaml (part of the combined file)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nextcloud-ingress
+  namespace: nextcloud2
+spec:
+  rules:
+    - host: nextcloud2.yourexampledomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - nextcloud2.yourexampledomain.com
+      secretName: nextcloud2-tls
