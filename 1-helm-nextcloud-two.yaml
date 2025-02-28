@@ -1,8 +1,47 @@
+# Create the namespace for Nextcloud
 apiVersion: v1
 kind: Namespace
 metadata:
   name: nextcloud2
 ---
+# HelmOperator CRDs installation if not already installed
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: helmreleases.helm.cattle.io
+spec:
+  group: helm.cattle.io
+  names:
+    kind: HelmRelease
+    listKind: HelmReleaseList
+    plural: helmreleases
+    singular: helmrelease
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              chart:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  repository:
+                    type: string
+                  version:
+                    type: string
+              values:
+                type: object
+                additionalProperties: true
+---
+# Install the HelmRelease for Nextcloud
 apiVersion: helm.cattle.io/v1
 kind: HelmRelease
 metadata:
@@ -11,12 +50,12 @@ metadata:
 spec:
   chart:
     name: nextcloud
-    version: "22.0.0" # Use the desired version
+    version: "22.0.0"  # Use the desired version
     repository: https://nextcloud.github.io/helm/
   values:
     persistence:
       enabled: true
-      existingClaim: nextcloud2-pvc # Optional, you can define persistent storage here
+      existingClaim: nextcloud2-pvc  # Optional, you can define persistent storage here
     ingress:
       enabled: true
       annotations:
