@@ -1,0 +1,16 @@
+persistence:
+  enabled: true
+  existingClaim: nextcloud2-pvc
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: nextcloud2.yourexampledomain.com
+      paths:
+        - /
+  tls:
+    - secretName: nextcloud2-tls
+      hosts:
+        - nextcloud2.yourexampledomain.com
