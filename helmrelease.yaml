@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nextcloud2
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: nextcloud2
+spec:
+  chart:
+    name: nextcloud
+    version: "22.0.0"  # Use the desired version
+    repository: https://nextcloud.github.io/helm/
+  values:
+    persistence:
+      enabled: true
+      existingClaim: nextcloud2-pvc  # Optional, you can define persistent storage here
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: nextcloud2.yourexampledomain.com
+          paths:
+            - /
+      tls:
+        - secretName: nextcloud2-tls
+          hosts:
+            - nextcloud2.yourexampledomain.com
