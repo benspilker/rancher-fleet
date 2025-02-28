@@ -16,7 +16,7 @@ spec:
   values:
     persistence:
       enabled: true
-      existingClaim: nextcloud2-pvc  # Optional, you can define persistent storage here
+      existingClaim: nextcloud2-pvc  # Optional, use your PVC if needed
     ingress:
       enabled: true
       annotations:
