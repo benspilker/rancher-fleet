@@ -11,7 +11,7 @@ spec:
   values:
     persistence:
       enabled: true
-      size: 10Gi  # Define the size for the PVC
+      size: 5Gi  # Adjust the size as needed
     ingress:
       enabled: true
       annotations:
