@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nextcloud-ingress
+  namespace: nextcloud2
+spec:
+  rules:
+    - host: nextcloud2.yourexampledomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - nextcloud2.yourexampledomain.com
+      secretName: nextcloud2-tls
