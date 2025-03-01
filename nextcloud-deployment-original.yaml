@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nextcloud2
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nextcloud
+  namespace: nextcloud2
+type: Opaque
+data:
+  nextcloud-username: YWRtaW4=      # Base64 encoded 'admin'
+  nextcloud-password: Y2hhbmdlbWU=  # Base64 encoded 'changeme'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: nextcloud
+    meta.helm.sh/release-namespace: nextcloud2
+  labels:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nextcloud
+    helm.sh/chart: nextcloud-6.6.3
+  name: nextcloud
+  namespace: nextcloud2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: app
+      app.kubernetes.io/instance: nextcloud
+      app.kubernetes.io/name: nextcloud
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        hooks-hash: 9525c2748a6c7cd0e28ec740623d0b3fa5a75c83b51ccfd136bc89c76737b204
+        nextcloud-config-hash: 8266a725d5474acb6adbf9f0609a3494dc3340a3ac306db90eac9ddb1b851960
+        php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+      labels:
+        app.kubernetes.io/component: app
+        app.kubernetes.io/instance: nextcloud
+        app.kubernetes.io/name: nextcloud
+    spec:
+      containers:
+      - name: nextcloud
+        image: nextcloud:30.0.5-apache
+        ports:
+        - containerPort: 80
+        env:
+        - name: SQLITE_DATABASE
+          value: nextcloud
+        - name: NEXTCLOUD_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              key: nextcloud-username
+              name: nextcloud
+        - name: NEXTCLOUD_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: nextcloud-password
+              name: nextcloud
+        - name: NEXTCLOUD_TRUSTED_DOMAINS
+          value: nextcloud.kube.home
+        - name: NEXTCLOUD_DATA_DIR
+          value: /var/www/html/data
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: nextcloud-main
+          subPath: html
+        - mountPath: /var/www/html/config
+          name: nextcloud-main
+          subPath: config
+        - mountPath: /var/www/html/data
+          name: nextcloud-main
+          subPath: data
+        - mountPath: /var/www/html/themes
+          name: nextcloud-main
+          subPath: themes
+        - mountPath: /var/www/html/custom_apps
+          name: nextcloud-main
+          subPath: custom_apps
+        - mountPath: /var/www/tmp
+          name: nextcloud-main
+          subPath: tmp
+      volumes:
+      - name: nextcloud-main
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextcloud
+  namespace: nextcloud2
+spec:
+  selector:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/name: nextcloud
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
