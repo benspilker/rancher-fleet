@@ -53,14 +53,6 @@ spec:
         image: nextcloud:30.0.5-apache
         ports:
         - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /status.php  # Change this if you want to use a different path
-            port: 80
-          initialDelaySeconds: 30  # Increased delay
-          periodSeconds: 5
-          timeoutSeconds: 5
-          failureThreshold: 3
         volumeMounts:
         - mountPath: /var/www/html
           name: nextcloud-main
