@@ -15,6 +15,8 @@ Note: YAML files 1-3 can be deployed all at once. Their dependencies are handled
 0.B. **Prerequisite B, Setup DNS**: Setup of DNS to ensure the Nextcloud domain is correctly resolved to the soon to be Ingress IP, ie nextcloud.yourexampledomain.com resolves to 192.168.100.203.
 See DNS shell script in Proxmox-k3s repository: https://github.com/benspilker/proxmox-k3s/blob/main/5-6_Install-Nextcloud/5A-domainname-dns.sh
 
+---
+
 1. **Deploy Nextcloud with Persistent Storage**: Deploy Nextcloud using Helm in its own Kubernetes namespace with persistent storage.
 2. **Create Self-Signed Certificate**: Generate a self-signed certificate for HTTPS access to Nextcloud.
 3. **Define Ingress**: Create and apply an Ingress resource to expose Nextcloud via HTTPS.
