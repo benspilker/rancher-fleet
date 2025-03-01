@@ -6,8 +6,6 @@ The assumption is that you already have a working Kubernetes Cluster with Ranche
 
 Another Prerequite is having a working Rancher Fleet Pipeline, See 0.A
 
-NOTE THIS CREATES A SEPARATE NAMESPACE: NEXTCLOUD2
-
 ---
 
 0.A. **Prerequisite A, Fleet Pipeline** Assuming you already have a Rancher Fleet repository setup using Github for Continuous Delivery. See Jim's Garage: https://youtu.be/ulKimzGWtqc?si=uBBu3owusGF2BbDW
@@ -17,6 +15,8 @@ See DNS shell script in Proxmox-k3s repository: https://github.com/benspilker/pr
 
 ---
 Note: YAML files 1-3 can be deployed all at once. Their dependencies are handled by the file names: 1, 2, 3.
+
+NOTE THIS CREATES A SEPARATE NAMESPACE: NEXTCLOUD2
 
 1. **Deploy Nextcloud with Persistent Storage**: Deploy Nextcloud using Helm in its own Kubernetes namespace with persistent storage.
 2. **Create Self-Signed Certificate**: Generate a self-signed certificate for HTTPS access to Nextcloud.
