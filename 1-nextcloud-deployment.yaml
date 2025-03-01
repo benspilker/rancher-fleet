@@ -71,13 +71,13 @@ spec:
           name: nextcloud-data
           subPath: data
         - mountPath: /var/www/html/themes
-          name: nextcloud-data
+          name: nextcloud-themes
           subPath: themes
         - mountPath: /var/www/html/custom_apps
-          name: nextcloud-data
+          name: nextcloud-custom_apps
           subPath: custom_apps
         - mountPath: /var/www/tmp
-          name: nextcloud-data
+          name: nextcloud-tmp
           subPath: tmp
         env:
         - name: SQLITE_DATABASE
@@ -105,6 +105,12 @@ spec:
       - name: nextcloud-data
         persistentVolumeClaim:
           claimName: nextcloud-data-pvc
+      - name: nextcloud-themes
+        emptyDir: {}  # Ephemeral
+      - name: nextcloud-custom_apps
+        emptyDir: {}  # Ephemeral
+      - name: nextcloud-tmp
+        emptyDir: {}  # Ephemeral
 ---
 apiVersion: v1
 kind: Service
