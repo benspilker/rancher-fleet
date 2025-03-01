@@ -12,4 +12,4 @@ Yaml Files 1-3 can be pushed to the repository all at once.
 
 ---
 
-This completes the setup for Nextcloud with persistent storage and a fully functioning K3s cluster. You should now be able to acccess it using https://nextcloud.yourexampledomain.com
+This completes the setup for Nextcloud with persistent storage and a fully functioning K3s cluster. You should now be able to acccess it internally using https://nextcloud.yourexampledomain.com
