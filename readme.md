@@ -1,4 +1,4 @@
-## Install Nextcloud Instance in a GitOps method using Fleet
+## Install Nextcloud Instance in a GitOps method using Rancher Fleet
 
 Yaml Files 1-3 can be pushed to the repository all at once.
 
