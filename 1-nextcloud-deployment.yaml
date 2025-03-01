@@ -75,7 +75,7 @@ spec:
               name: nextcloud-themes
               subPath: themes
             - mountPath: /var/www/html/custom_apps
-              name: nextcloud-custom_apps
+              name: nextcloud-custom-apps
               subPath: custom_apps
             - mountPath: /var/www/tmp
               name: nextcloud-tmp
@@ -108,7 +108,7 @@ spec:
             claimName: nextcloud-data-pvc
         - name: nextcloud-themes
           emptyDir: {}  # Ephemeral
-        - name: nextcloud-custom_apps
+        - name: nextcloud-custom-apps
           emptyDir: {}  # Ephemeral
         - name: nextcloud-tmp
           emptyDir: {}  # Ephemeral
