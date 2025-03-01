@@ -6,6 +6,7 @@ The assumption is that you already have a working Kubernetes Cluster with Ranche
 
 Another Prerequite is having a working Rancher Fleet Pipeline, See 0.A
 
+---
 
 Note: YAML files 1-3 can be deployed all at once. Their dependencies are handled by the file names: 1, 2, 3.
 
