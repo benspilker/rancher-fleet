@@ -47,70 +47,71 @@ spec:
         app.kubernetes.io/component: app
         app.kubernetes.io/instance: nextcloud
         app.kubernetes.io/name: nextcloud
-  containers:
-    - name: nextcloud
-      image: nextcloud:30.0.5-apache
-      ports:
-        - containerPort: 80
-      readinessProbe:
-        httpGet:
-          path: /status.php  # Change this if you want to use a different path
-          port: 80
-        initialDelaySeconds: 30  # Increased delay
-        periodSeconds: 5
-        timeoutSeconds: 5
-        failureThreshold: 3
-      volumeMounts:
-        - mountPath: /var/www/html
-          name: nextcloud-main
-          subPath: html
-        - mountPath: /var/www/html/config
-          name: nextcloud-config
-          subPath: config
-        - mountPath: /var/www/html/data
-          name: nextcloud-data
-          subPath: data
-        - mountPath: /var/www/html/themes
-          name: nextcloud-themes
-          subPath: themes
-        - mountPath: /var/www/html/custom_apps
-          name: nextcloud-custom_apps
-          subPath: custom_apps
-        - mountPath: /var/www/tmp
-          name: nextcloud-tmp
-          subPath: tmp
-      env:
-        - name: SQLITE_DATABASE
-          value: nextcloud
-        - name: NEXTCLOUD_ADMIN_USER
-          valueFrom:
-            secretKeyRef:
-              key: nextcloud-username
-              name: nextcloud
-        - name: NEXTCLOUD_ADMIN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: nextcloud-password
-              name: nextcloud
-        - name: NEXTCLOUD_TRUSTED_DOMAINS
-          value: nextcloud.yourexampledomain.com
-        - name: NEXTCLOUD_DATA_DIR
-          value: /var/www/html/data
-  volumes:
-    - name: nextcloud-main
-      emptyDir: {}  # Keeps this as ephemeral (non-persistent) storage
-    - name: nextcloud-config
-      persistentVolumeClaim:
-        claimName: nextcloud-config-pvc
-    - name: nextcloud-data
-      persistentVolumeClaim:
-        claimName: nextcloud-data-pvc
-    - name: nextcloud-themes
-      emptyDir: {}  # Ephemeral
-    - name: nextcloud-custom_apps
-      emptyDir: {}  # Ephemeral
-    - name: nextcloud-tmp
-      emptyDir: {}  # Ephemeral
+    spec:
+      containers:
+        - name: nextcloud
+          image: nextcloud:30.0.5-apache
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /status.php  # Change this if you want to use a different path
+              port: 80
+            initialDelaySeconds: 30  # Increased delay
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: nextcloud-main
+              subPath: html
+            - mountPath: /var/www/html/config
+              name: nextcloud-config
+              subPath: config
+            - mountPath: /var/www/html/data
+              name: nextcloud-data
+              subPath: data
+            - mountPath: /var/www/html/themes
+              name: nextcloud-themes
+              subPath: themes
+            - mountPath: /var/www/html/custom_apps
+              name: nextcloud-custom_apps
+              subPath: custom_apps
+            - mountPath: /var/www/tmp
+              name: nextcloud-tmp
+              subPath: tmp
+          env:
+            - name: SQLITE_DATABASE
+              value: nextcloud
+            - name: NEXTCLOUD_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  key: nextcloud-username
+                  name: nextcloud
+            - name: NEXTCLOUD_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: nextcloud-password
+                  name: nextcloud
+            - name: NEXTCLOUD_TRUSTED_DOMAINS
+              value: nextcloud.yourexampledomain.com
+            - name: NEXTCLOUD_DATA_DIR
+              value: /var/www/html/data
+      volumes:
+        - name: nextcloud-main
+          emptyDir: {}  # Keeps this as ephemeral (non-persistent) storage
+        - name: nextcloud-config
+          persistentVolumeClaim:
+            claimName: nextcloud-config-pvc
+        - name: nextcloud-data
+          persistentVolumeClaim:
+            claimName: nextcloud-data-pvc
+        - name: nextcloud-themes
+          emptyDir: {}  # Ephemeral
+        - name: nextcloud-custom_apps
+          emptyDir: {}  # Ephemeral
+        - name: nextcloud-tmp
+          emptyDir: {}  # Ephemeral
 ---
 apiVersion: v1
 kind: Service
