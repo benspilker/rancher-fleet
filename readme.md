@@ -26,4 +26,4 @@ NOTE THIS CREATES A SEPARATE NAMESPACE: NEXTCLOUD2
 
 ---
 
-This completes the setup for Nextcloud with persistent storage and a fully functioning K3s cluster. You should now be able to acccess it internally using https://nextcloud.yourexampledomain2.com
+This completes the setup for Nextcloud with persistent storage and a fully functioning K3s cluster. You should now be able to access it internally using https://nextcloud.yourexampledomain2.com
