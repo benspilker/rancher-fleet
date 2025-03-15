@@ -5,7 +5,7 @@ metadata:
   namespace: nextcloud2
 spec:
   rules:
-  - host: nextcloud.yourexampledomain.com
+  - host: nextcloud.yourexampledomain2.com
     http:
       paths:
       - path: /
@@ -17,5 +17,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - nextcloud.yourexampledomain.com
+    - nextcloud.yourexampledomain2.com
     secretName: nextcloud-tls
