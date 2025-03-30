@@ -86,7 +86,7 @@ spec:
               key: nextcloud-password
               name: nextcloud
         - name: NEXTCLOUD_TRUSTED_DOMAINS
-          value: nextcloud.yourexampledomain.com
+          value: nextcloud.yourexampledomain2.com
         - name: NEXTCLOUD_DATA_DIR
           value: /var/www/html/data
       volumes:
