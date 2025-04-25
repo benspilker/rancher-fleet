@@ -47,9 +47,9 @@ kubectl exec -it $POD_NAME -n nextcloud -- /bin/sh -c 'cat /var/www/html/config/
 <Insert Screenshot of config file Here>
 
 ---
-# If changing domain, make sure to edit the value: yourexampledomain2.com on the following files:
-YAML FILE 5 (Nextcloud Deployment): LINE 143
-YAML FILE 6 (CERT): LINES 20 AND 22
-YAML FILE 7 (INGRESS): LINES 8 AND 20
+# If changing domainname, make sure to edit the value: yourexampledomain2.com on the following files:
+5. (Nextcloud Deployment): LINE 143
+6. (CERT): LINES 20 AND 22
+7. (INGRESS): LINES 8 AND 20
 
 This completes the setup for Nextcloud with persistent storage and a fully functioning K3s cluster. You should now be able to access it internally using https://nextcloud.yourexampledomain2.com
