@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-customize
+  namespace: nextcloud2
+spec:
+  template:
+    spec:
+      containers:
+        - name: mariadb-customize
+          image: bitnami/mariadb:10.3.27
+          command:
+            - "/bin/bash"
+            - "-c"
+            - |
+              # Get the password directly from the secret without base64 decoding
+              MARIADB_ROOT_PASSWORD=$(cat /etc/secrets/password)
+
+              # Log the password before executing the commands
+              echo "Root password used for connection: $MARIADB_ROOT_PASSWORD"
+
+              # Wait for MariaDB to be ready
+              echo "Waiting for MariaDB to be ready..."
+              until mysql -h mariadb -u root -p$MARIADB_ROOT_PASSWORD -e "SELECT 1"; do
+                echo "Waiting for MariaDB to be up and ready..."
+                sleep 5
+              done
+
+              # MariaDB is ready, execute the SQL commands
+              mysql -h mariadb -u root -p$MARIADB_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS nextcloud;"
+              mysql -h mariadb -u root -p$MARIADB_ROOT_PASSWORD -e "CREATE USER IF NOT EXISTS 'nextcloud'@'%' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';"
+              mysql -h mariadb -u root -p$MARIADB_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'%';"
+              mysql -h mariadb -u root -p$MARIADB_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+          volumeMounts:
+            - name: mariadb-secret-volume
+              mountPath: /etc/secrets
+              readOnly: true
+      restartPolicy: OnFailure
+      volumes:
+        - name: mariadb-secret-volume
+          secret:
+            secretName: mariadb-secret
+            items:
+              - key: password
+                path: password
