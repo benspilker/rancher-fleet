@@ -17,8 +17,8 @@ spec:
   issuerRef:
     name: selfsigned-issuer
     kind: Issuer
-  commonName: nextcloud.yourexampledomain2.com
+  commonName: nextcloud.yourexampledomain2.com	# nextcloud.yourexampledomain2.com (subdomain)
   dnsNames:
-    - nextcloud.yourexampledomain2.com
+    - nextcloud.yourexampledomain2.com	# nextcloud.yourexampledomain2.com (subdomain)
   duration: 8760h # 1 year
   renewBefore: 360h # 15 days before expiry
