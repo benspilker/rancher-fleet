@@ -5,7 +5,7 @@ https://github.com/benspilker/proxmox-k3s
 
 The assumption is that you already have a working Kubernetes Cluster with Rancher, meaning steps 1-4 in the Proxmox-K3s repository have been setup in your environment.
 
-Another Prerequisite is having a working Rancher Fleet Pipeline, See 0.A
+Another Prerequisite is having a working Rancher Fleet Pipeline and Git installed on your workstation, See 0.A
 
 ---
 
