@@ -5,14 +5,14 @@ https://github.com/benspilker/proxmox-k3s
 
 The assumption is that you already have a working Kubernetes Cluster with Rancher, meaning steps 1-4 in the Proxmox-K3s repository have been setup in your environment.
 
-Another Prerequisite is having a working Rancher Fleet Pipeline and Git installed on your workstation, See 0.A
+Another Prerequisite is having a working Rancher Fleet Pipeline and Git installed on your workstation, See Step 0.A
 
 ---
 
-0.A. **Prerequisite A, Fleet Pipeline** Assuming you already have a Rancher Fleet repository setup using Github for Continuous Delivery. See Jim's Garage: https://youtu.be/ulKimzGWtqc?si=uBBu3owusGF2BbDW
+Step 0.A. **Prerequisite A, Fleet Pipeline** Assuming you already have a Rancher Fleet repository setup using Github for Continuous Delivery. See Jim's Garage: https://youtu.be/ulKimzGWtqc?si=uBBu3owusGF2BbDW
 
 ---
-## Getting Started
+## Getting Started Step 0.A
 
 To get a copy of this repository up and running on your local machine and push code to your own, follow these instructions:
 
@@ -20,13 +20,18 @@ To get a copy of this repository up and running on your local machine and push c
     ```bash
     git clone https://github.com/benspilker/rancher-fleet.git
 
-2. Create a new folder with a blank readme on your local machine
+2. Show that a new folder of the cloned repo exists, then cd back to home folder
+    ```bash    
+    cd rancher-fleet
+    cd ..
+
+3. Create a new folder with a blank readme on your local machine
     ```bash
     mkdir new-repo
     cd new-repo
     echo 'New Readme' >> readme.md
 
-3. Initialize a New Git Repository from your new folder
+4. Initialize a New Git Repository from your new folder
     ```bash
     git init
     git add readme.md
@@ -35,23 +40,23 @@ To get a copy of this repository up and running on your local machine and push c
     git remote add origin https://github.com/youruser/new-repo.git
     git push -u origin main
 
-4. Copy the File(s) as needed from rancher-fleet repo into your new folder
+5. Copy the File(s) as needed from rancher-fleet repo into your new folder
 
-5. Commit and push the File(s) as needed
+6. Commit and push the File(s) as needed
     ```bash
     git add make-namespace.yaml
     git status
     git commit -m "added test yaml file"
     git push origin main
 
-6. Manually Delete the test file, copy and add all files (After Prereq B, DNS is met)
+7. Manually Delete the test file, copy and add all files (After Prereq B, DNS is met)
       ```bash
     git add .
     git status
     git commit -m "adding all yaml files"
     git push origin main
 ---
-0.B. **Prerequisite B, Setup DNS**: Setup of DNS to ensure the Nextcloud domain is correctly resolved to the soon to be Ingress IP, ie nextcloud.yourexampledomain2.com resolves to 192.168.100.203.
+Step 0.B. **Prerequisite B, Setup DNS**: Setup of DNS to ensure the Nextcloud domain is correctly resolved to the soon to be Ingress IP, ie nextcloud.yourexampledomain2.com resolves to 192.168.100.203.
 See DNS shell script in Proxmox-k3s repository: https://github.com/benspilker/proxmox-k3s/blob/main/5-6_Install-Nextcloud/5A-domainname-dns.sh
 
 Run script 5A again, but add the number 2 to end of your domainname.
