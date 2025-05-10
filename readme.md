@@ -49,8 +49,10 @@ To get a copy of this repository up and running on your local machine and push c
     git commit -m "added test yaml file"
     git push origin main
 
-7. Manually Delete the test file, copy and add all files (After Prereq Step 0.B, DNS is met)
-      ```bash
+7. Manually delete the test file and copy all files (After Prereq Step 0.B, DNS is met)
+
+8. Commit and push all files (After Prereq Step 0.B, DNS is met)
+    ```bash
     git add .
     git status
     git commit -m "adding all yaml files"
