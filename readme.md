@@ -56,7 +56,7 @@ See DNS shell script in Proxmox-k3s repository: https://github.com/benspilker/pr
 
 Run that script again but add the number 2 to the end of your domain.
 ---
-Note: YAML files 1-7 can be deployed all at once. Their dependencies are handled by the file names: 1, 2, 3.
+Note: YAML files 1-7 can be deployed all at once. Their dependencies are handled by the file names: 1, 2, 3, etc.
 
 NOTE THIS CREATES A SEPARATE NAMESPACE: NEXTCLOUD2
 
