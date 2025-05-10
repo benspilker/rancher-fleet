@@ -54,7 +54,7 @@ To get a copy of this repository up and running on your local machine and push c
 0.B. **Prerequisite B, Setup DNS**: Setup of DNS to ensure the Nextcloud domain is correctly resolved to the soon to be Ingress IP, ie nextcloud.yourexampledomain2.com resolves to 192.168.100.203.
 See DNS shell script in Proxmox-k3s repository: https://github.com/benspilker/proxmox-k3s/blob/main/5-6_Install-Nextcloud/5A-domainname-dns.sh
 
-Run 5A script again but add the number 2 to end of your domainname.
+Run script 5A again, but add the number 2 to end of your domainname.
 ---
 Note: YAML files 1-7 can be deployed all at once. Their dependencies are handled by the file names: 1, 2, 3, etc.
 
