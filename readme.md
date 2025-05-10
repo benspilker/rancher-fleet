@@ -40,7 +40,7 @@ To get a copy of this repository up and running on your local machine and push c
     git remote add origin https://github.com/youruser/new-repo.git
     git push -u origin main
 
-5. Copy the File(s) as needed from rancher-fleet repo into your new folder
+5. Manually copy the File(s) as needed from rancher-fleet repo into your new folder
 
 6. Commit and push the File(s) as needed
     ```bash
