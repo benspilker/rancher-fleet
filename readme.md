@@ -19,11 +19,16 @@ Run that script again but add the number 2 to the end of your domain.
 Note: YAML files 1-7 can be deployed all at once. Their dependencies are handled by the file names: 1, 2, 3.
 
 NOTE THIS CREATES A SEPARATE NAMESPACE: NEXTCLOUD2
+
 ---
+## Getting Started
+
+To get a copy of this repository up and running on your local machine, follow these instructions:
+
 1. Clone the repository (requires git installed on your machine first):
    ```bash
    git clone https://github.com/benspilker/rancher-fleet.git
-
+---
 ## GitOps Nextcloud Install with MySQL and Persistent Storage
 
 1. **Create Nextcloud2 Namespace and Apply Permissions**: Create the namespace and create the RBAC permissions for our deployment to be able to create and use a Kubernetes Secret. This way we will have the ability to define a password for our MySQL instance later when it gets deployed.
