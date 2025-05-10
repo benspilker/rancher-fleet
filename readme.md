@@ -17,17 +17,19 @@ Another Prerequisite is having a working Rancher Fleet Pipeline and Git installe
 To get a copy of this repository up and running on your local machine and push code to your own, follow these instructions:
 
 1. Clone the repository (requires git installed on your machine first):
-   ```bash
+    ```bash
     git clone https://github.com/benspilker/rancher-fleet.git
 
+
 2. Create a new folder with a blank readme on your local machine
-  ```bash
+    ```bash
     mkdir new-repo
     cd new-repo
     echo 'New Readme' >> readme.md
 
+
 3. Initialize a New Git Repository from your new folder
-   ```bash
+    ```bash
     git init
     git add readme.md
     git commit -m "first commit"
@@ -35,10 +37,12 @@ To get a copy of this repository up and running on your local machine and push c
     git remote add origin https://github.com/youruser/new-repo.git
     git push -u origin main
 
+
 4. Copy the File(s) as needed from rancher-fleet repo into your new folder
 
+
 5. Commit and push the File(s) as needed
-   ```bash
+    ```bash
     git add make-namespace.yaml
     git status
     git commit -m "added test yaml file"
@@ -50,7 +54,6 @@ To get a copy of this repository up and running on your local machine and push c
     git status
     git commit -m "adding all yaml files"
     git push origin main
-
 ---
 0.B. **Prerequisite B, Setup DNS**: Setup of DNS to ensure the Nextcloud domain is correctly resolved to the soon to be Ingress IP, ie nextcloud.yourexampledomain2.com resolves to 192.168.100.203.
 See DNS shell script in Proxmox-k3s repository: https://github.com/benspilker/proxmox-k3s/blob/main/5-6_Install-Nextcloud/5A-domainname-dns.sh
