@@ -20,13 +20,11 @@ To get a copy of this repository up and running on your local machine and push c
     ```bash
     git clone https://github.com/benspilker/rancher-fleet.git
 
-
 2. Create a new folder with a blank readme on your local machine
     ```bash
     mkdir new-repo
     cd new-repo
     echo 'New Readme' >> readme.md
-
 
 3. Initialize a New Git Repository from your new folder
     ```bash
@@ -37,9 +35,7 @@ To get a copy of this repository up and running on your local machine and push c
     git remote add origin https://github.com/youruser/new-repo.git
     git push -u origin main
 
-
 4. Copy the File(s) as needed from rancher-fleet repo into your new folder
-
 
 5. Commit and push the File(s) as needed
     ```bash
