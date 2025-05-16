@@ -90,6 +90,7 @@ For this reason, the shell script on the sidecar container has a 3 minute waitin
     kubectl exec -it $POD_NAME -n nextcloud -- /bin/sh -c 'cat /var/www/html/config/config.php'
 
 ---
+Example Config
 <img src="example-config.png" width="800" />
 
 ---
