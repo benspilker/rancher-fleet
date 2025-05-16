@@ -83,7 +83,7 @@ NOTE THIS CREATES A SEPARATE NAMESPACE: NEXTCLOUD2
 For this reason, the shell script on the sidecar container has a 3 minute waiting period, then checks in a loop to modify the settings again. It may take up to 5 minutes of the pod being online for the configuration to correct. If we were to browse to our deployment ( ie https://nextcloud.yourexampledomain2.com ) before the config file gets edited, we will get a "trusted domain" error.
 
 ---
-To check config file, from Admin Machine run:
+1. To check config file, from Admin Machine run:
     ```bash
     kubectl get pods -n nexcloud2
     POD_NAME=$(kubectl get pods -n nextcloud --no-headers | grep -v maria | awk '{print $1}' | head -n 1)
