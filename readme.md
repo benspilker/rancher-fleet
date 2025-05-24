@@ -88,8 +88,8 @@ For this reason, the shell script on the sidecar container has a 3 minute waitin
 1. To check config file, from Admin Machine run:
     ```bash
     kubectl get pods -n nexcloud2
-    POD_NAME=$(kubectl get pods -n nextcloud --no-headers | grep -v maria | awk '{print $1}' | head -n 1)
-    kubectl exec -it $POD_NAME -n nextcloud -- /bin/sh -c 'cat /var/www/html/config/config.php'
+    POD_NAME=$(kubectl get pods -n nextcloud2 --no-headers | grep -v maria | awk '{print $1}' | head -n 1)
+    kubectl exec -it $POD_NAME -n nextcloud2 -- /bin/sh -c 'cat /var/www/html/config/config.php'
 
 ---
 Example Config
