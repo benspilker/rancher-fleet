@@ -40,6 +40,7 @@ REMEMBER TO CHANGE URL TO MATCH GITHUB USER
     git branch -M main
 
     git remote add origin https://github.com/youruser/new-repo.git
+    
     git push -u origin main
 
 5. Manually copy the File(s) as needed from rancher-fleet repo into your new folder
