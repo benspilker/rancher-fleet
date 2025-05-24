@@ -32,7 +32,7 @@ To get a copy of this repository up and running on your local machine and push c
     echo 'New Readme' >> readme.md
 
 4. Initialize a New Git Repository from your new folder.
-NOTE: REMEMBER TO CHANGE URL TO MATCH YOUR USER
+NOTE: REMEMBER TO CHANGE URL TO MATCH GITHUB USER
     ```bash
     git init
     git add readme.md
