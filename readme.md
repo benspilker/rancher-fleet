@@ -9,7 +9,12 @@ Another Prerequisite is having a working Rancher Fleet Pipeline and Git installe
 
 ---
 
-Step 0.A. **Prerequisite A, Fleet Pipeline** Assuming you already have a Rancher Fleet repository setup using Github for Continuous Delivery. See Jim's Garage: https://youtu.be/ulKimzGWtqc?si=uBBu3owusGF2BbDW
+Step 0.A. **Prerequisite A, Fleet Pipeline** Assuming you already have a Rancher Fleet repository setup using Github for Continuous Delivery. 
+
+## Video Walkthrough:
+Tip: Right-click thumbnail and select "Open link in new tab" for the best experience.
+
+[![Watch the video](yt-thumb.png)](https://www.youtube.com/watch?v=KJsWq1SeZp4&list=PLglfnvX1BuSN4ZQVhKbxM6KHA4W2IPl8p&index=8)
 
 ---
 ## Getting Started Step 0.A
