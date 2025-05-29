@@ -25,20 +25,17 @@ Tip: Right-click and open in a new tab for best experience.
 ### Step 0.A – Setup Local Git Repository
 
 # 1. Clone this repo
-    ```bash
 git clone https://github.com/benspilker/rancher-fleet.git
 cd rancher-fleet
 cd ..
-	```
+
 # 2. Create and initialize your own Git repo
-    ```bash
 mkdir new-repo && cd new-repo
 echo 'New Readme' > README.md
 git init
 git add README.md
 git commit -m "Initial commit"
 git branch -M main
-	```
 	
 # 3. Change your URL to match Github User
     ```bash
