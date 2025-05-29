@@ -1,109 +1,158 @@
-## Install Nextcloud Instance in a GitOps method using Rancher Fleet
+# Install Nextcloud via GitOps with Rancher Fleet
 
-This repository is an extension of the Proxmox-K3s repository.
-https://github.com/benspilker/proxmox-k3s
-
-The assumption is that you already have a working Kubernetes Cluster with Rancher, meaning steps 1-4 in the Proxmox-K3s repository have been setup in your environment.
-
-Another Prerequisite is having a working Rancher Fleet Pipeline and Git installed on your workstation, See Step 0.A
+This repository extends the [Proxmox-K3s](https://github.com/benspilker/proxmox-k3s) setup to deploy a **Nextcloud** instance using **Rancher Fleet** in a GitOps-friendly method.
 
 ---
 
-Step 0.A. **Prerequisite A, Fleet Pipeline** Assuming you already have a Rancher Fleet repository setup using Github for Continuous Delivery. 
+## Prerequisites
 
-## Video Walkthrough:
-Tip: Right-click thumbnail and select "Open link in new tab" for the best experience.
+1. **Kubernetes Cluster with Rancher**: Ensure steps 1–4 of [Proxmox-K3s](https://github.com/benspilker/proxmox-k3s) are completed.
+2. **Rancher Fleet CD Pipeline**: You need a working Fleet repo connected to GitHub.
+3. **Git Installed**: Git is required on your local machine.
+
+---
+
+## Video Walkthrough
+
+Tip: Right-click and open in a new tab for best experience.
 
 [![Watch the video](yt-thumb.png)](https://www.youtube.com/watch?v=KJsWq1SeZp4&list=PLglfnvX1BuSN4ZQVhKbxM6KHA4W2IPl8p&index=8)
 
 ---
-## Getting Started Step 0.A
 
-To get a copy of this repository up and running on your local machine and push code to your own, follow these instructions:
+## Getting Started
 
-1. Clone the repository (requires git installed on your machine first):
+### Step 0.A – Setup Local Git Repository
+
+# 1. Clone this repo
     ```bash
-    git clone https://github.com/benspilker/rancher-fleet.git
+git clone https://github.com/benspilker/rancher-fleet.git
+cd rancher-fleet
+cd ..
 
-2. Show that a new folder of the cloned repo exists, then cd back to home folder
-    ```bash    
-    cd rancher-fleet
-    cd ..
-
-3. Create a new folder with a blank readme on your local machine
+# 2. Create and initialize your own Git repo
     ```bash
-    mkdir new-repo
-    cd new-repo
-    echo 'New Readme' >> readme.md
+mkdir new-repo && cd new-repo
+echo 'New Readme' > README.md
+git init
+git add README.md
+git commit -m "Initial commit"
+git branch -M main
 
-4. Initialize a New Git Repository from your new folder.
-REMEMBER TO CHANGE URL TO MATCH GITHUB USER
+# 3. Change your URL to match Github User
     ```bash
-    git init
-    git add readme.md
-    git commit -m "first commit"
-    git branch -M main
+git remote add origin https://github.com/youruser/new-repo.git
+git push -u origin main
 
-    git remote add origin https://github.com/youruser/new-repo.git
-    
-    git push -u origin main
 
-5. Manually copy the File(s) as needed from rancher-fleet repo into your new folder
+# 4. Manually copy your test file(s) as needed from rancher-fleet repo into your new folder
 
-6. Commit and push the File(s) as needed
+# 5. Commit and push the test file(s) as needed
     ```bash
     git add make-namespace.yaml
     git status
     git commit -m "added test yaml file"
     git push origin main
+	
 
-7. Manually delete the test file and copy all files (After Prereq Step 0.B, DNS is met)
+### Step 0.B – Setup DNS
 
-8. Commit and push all files (After Prereq Step 0.B, DNS is met)
-    ```bash
-    git add .
-    git status
-    git commit -m "adding all yaml files"
-    git push origin main
----
-Step 0.B. **Prerequisite B, Setup DNS**: Setup of DNS to ensure the Nextcloud domain is correctly resolved to the soon to be Ingress IP, ie nextcloud.yourexampledomain2.com resolves to 192.168.100.203.
-See DNS shell script in Proxmox-k3s repository: https://github.com/benspilker/proxmox-k3s/blob/main/5-6_Install-Nextcloud/5A-domainname-dns.sh
+Ensure your domain (e.g. `nextcloud.yourexampledomain2.com`) points to the correct Ingress IP (e.g. `192.168.100.203`).
 
-Run script 5A again, but add the number 2 to end of your domainname.
----
-Note: YAML files 1-7 can be deployed all at once. Their dependencies are handled by the file names: 1, 2, 3, etc.
+Use the DNS script from [Proxmox-K3s](https://github.com/benspilker/proxmox-k3s/blob/main/5-6_Install-Nextcloud/5A-domainname-dns.sh), but append a `2` to your domainname by modifying the script.
 
-NOTE THIS CREATES A SEPARATE NAMESPACE: NEXTCLOUD2
+---		
+	
+### Step 0.C – Copy YAML files 1-7 and push:
 
----
-## GitOps Nextcloud Install with MySQL and Persistent Storage
-
-1. **Create Nextcloud2 Namespace and Apply Permissions**: Create the namespace and create the RBAC permissions for our deployment to be able to create and use a Kubernetes Secret. This way we will have the ability to define a password for our MySQL instance later when it gets deployed.
-2. **Generate Kubernetes Secret**: Run a batch job pod that generates the Kubernetes secret. The secret is 12 characters long, has capital and lowercase letters, has at least 1 number and 1 special character, then gets base64 encoded.
-3. **Deploy MariaDB MySQL**: Deploys the MariaDB MySQL install as a blank database. This Mariadb installation has persistent storage and gets its root password from the Kubernetes secret created from the previous step.
-4. **Customize MariaDB MySQL**: Runs a separate batch job pod that customizes the database setup in MariaDB by creating a new database called nextcloud with a user called nextcloud and also uses the same root password that was our Kubernetes secret, calling it mariadb-secret.
-5.  **Nextcloud Deployment with MySQL and Persistent Storage**: Deploys nextcloud with persistent storage and connects it to our MariaDB instance nextcloud database. Runs a 'sidecar' container as a secondary container in the same nextcloud pod to check the configuration file and ensures through shell script that the config.php file has the correct content.
-6. **Self-Signed Certificate Creation**: Creates and assigns a self-signed certificate for HTTPS access to Nextcloud.
-7. **Define Ingress**: Create and applies an Ingress resource to expose Nextcloud deployment to our LAN via HTTPS, using our self-signed certificate.
-8. **Wait for Configuration to Modify**: After the nextcloud instance is initialized, the config file may still have its default settings. The nextcloud pod may restart and then the config.php file goes back to default settings. 
-
-For this reason, the shell script on the sidecar container has a 3 minute waiting period, then checks in a loop to modify the settings again. It may take up to 5 minutes of the pod being online for the configuration to correct. If we were to browse to our deployment ( ie https://nextcloud.yourexampledomain2.com ) before the config file gets edited, we will get a "trusted domain" error.
+   ```bash
+   git add .
+   git commit -m "Adding all deployment YAMLs"
+   git push origin main
+   ```
 
 ---
-1. To check config file, from Admin Machine run:
-    ```bash
-    kubectl get pods -n nextcloud2
-    POD_NAME=$(kubectl get pods -n nextcloud2 --no-headers | grep -v maria | grep -v db- | awk '{print $1}' | head -n 1)
-    kubectl exec -it $POD_NAME -n nextcloud2 -- /bin/sh -c 'cat /var/www/html/config/config.php'
+
+## Deployment Overview
+
+The deployment uses seven YAML files, deployed in order (1 to 7). These YAMLs create a new namespace: `nextcloud2`.
+
+| Step | Description                                         |
+| ---- | --------------------------------------------------- |
+| 1    | Create namespace and apply RBAC for secrets         |
+| 2    | Run job to generate a secure Kubernetes secret      |
+| 3    | Deploy MariaDB with persistent storage using secret |
+| 4    | Customize database (`nextcloud` DB & user)          |
+| 5    | Deploy Nextcloud (with sidecar config checker)      |
+| 6    | Create and apply self-signed certificate            |
+| 7    | Apply Ingress to expose Nextcloud over HTTPS        |
 
 ---
-Example Config
-<img src="example-config.png" width="800" />
+
+## Configuration Timing Note
+
+After deployment, Nextcloud may restart and revert to default config. The sidecar container waits approximately 3 minutes and applies the config again in a loop. Allow up to 5 minutes for the final configuration to take effect.
+
+Accessing Nextcloud before the config is set will result in a "trusted domain" error.
 
 ---
-# If changing domainname, make sure to edit the value: yourexampledomain2.com on the following files:
-5. (Nextcloud Deployment): LINE 143
-6. (CERT): LINES 20 AND 22
-7. (INGRESS): LINES 8 AND 20
 
-This completes the setup for Nextcloud with persistent storage and a fully functioning K3s cluster. You should now be able to access it internally using https://nextcloud.yourexampledomain2.com
+## Verify Deployment
+
+Check the generated `config.php`:
+
+```bash
+kubectl get pods -n nextcloud2
+
+# Get Nextcloud pod name (exclude MariaDB)
+POD_NAME=$(kubectl get pods -n nextcloud2 --no-headers | grep -v maria | grep -v db- | awk '{print $1}' | head -n 1)
+
+# View config
+kubectl exec -it $POD_NAME -n nextcloud2 -- /bin/sh -c 'cat /var/www/html/config/config.php'
+```
+
+---
+
+## Example Configuration
+
+![Example Config](example-config.png)
+
+---
+
+## Redeploy with Custom settings if desired
+
+# Persistent Volume Size Customization
+
+Update the Gi size in these YAML files to customize their volume sizing:
+
+| File                      | Line(s) to Edit |
+| ------------------------- | --------------- |
+| `3-mariadb-install.yaml` 	| Line 59      	  |
+| `5-nextcloud-deploy.yaml` | Line 195	      |
+
+
+# Domain Name Customization
+
+Update the domain in these YAML files if you use a different domain:
+
+| File                      | Line(s) to Edit |
+| ------------------------- | --------------- |
+| `5-nextcloud-deploy.yaml` | Line 143        |
+| `6-cert.yaml`             | Lines 20, 22    |
+| `7-ingress.yaml`          | Lines 8, 20     |
+
+Also make sure your DNS resolution is set correctly (See Step 0B if using a custom domain)
+---
+
+## Final Result
+
+You should now have a fully functioning Nextcloud instance with:
+
+* Persistent Storage
+* MariaDB Integration
+* HTTPS access via self-signed certificate
+* GitOps workflow powered by Rancher Fleet
+
+Accessible at: `https://nextcloud.yourexampledomain2.com` (Or your customized domain)
+
+---
