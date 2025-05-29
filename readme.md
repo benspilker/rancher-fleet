@@ -29,7 +29,8 @@ Tip: Right-click and open in a new tab for best experience.
 git clone https://github.com/benspilker/rancher-fleet.git
 cd rancher-fleet
 cd ..
-
+```
+ 
 # 2. Create and initialize your own Git repo
 ```bash
 mkdir new-repo && cd new-repo
@@ -38,12 +39,14 @@ git init
 git add README.md
 git commit -m "Initial commit"
 git branch -M main
-	
+ ```
+ 
 # 3. Change your URL to match Github User
 ```bash
 git remote add origin https://github.com/youruser/new-repo.git
 git push -u origin main
-
+ ```
+ 
 # 4. Manually copy your test file(s) as needed from rancher-fleet repo into your new folder
 
 # 5. Commit and push the test file(s) as needed
@@ -52,7 +55,8 @@ git push -u origin main
     git status
     git commit -m "added test yaml file"
     git push origin main	
-
+ ```
+ 
 ### Step 0.B – Setup DNS
 
 Ensure your domain (e.g. `nextcloud.yourexampledomain2.com`) points to the correct Ingress IP (e.g. `192.168.100.203`).
