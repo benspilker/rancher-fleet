@@ -1,8 +1,8 @@
 # Install Nextcloud via GitOps with Rancher Fleet
 
-This repository extends the [Proxmox-K3s](https://github.com/benspilker/proxmox-k3s) setup to deploy a **Nextcloud** instance using **Rancher Fleet** in a GitOps-friendly method.
+This repository extends the [Proxmox-K3s](https://github.com/benspilker/proxmox-k3s) https://github.com/benspilker/proxmox-k3s setup to deploy a **Nextcloud** instance using **Rancher Fleet** in a GitOps-friendly method.
 
----
+--- 
 
 ## Prerequisites
 
