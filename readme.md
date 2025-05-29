@@ -127,7 +127,7 @@ kubectl exec -it $POD_NAME -n nextcloud2 -- /bin/sh -c 'cat /var/www/html/config
 
 Update the Gi size in these YAML files to customize their volume sizing:
 
-| File                      | Line(s) to Edit |
+| File                      | Line to Edit    |
 | ------------------------- | --------------- |
 | `3-mariadb-install.yaml` 	| Line 59      	  |
 | `5-nextcloud-deploy.yaml` | Line 195	      |
