@@ -51,10 +51,10 @@ git push -u origin main
 
 # 5. Commit and push the test file(s) as needed
 ```bash
-    git add make-namespace.yaml
-    git status
-    git commit -m "added test yaml file"
-    git push origin main	
+git add make-namespace.yaml
+git status
+git commit -m "added test yaml file"
+git push origin main	
  ```
  
 ### Step 0.B – Setup DNS
@@ -67,11 +67,11 @@ Use the DNS script from [Proxmox-K3s](https://github.com/benspilker/proxmox-k3s/
 	
 ### Step 0.C – Copy YAML files 1-7 and push:
 
-   ```bash
-   git add .
-   git commit -m "Adding all deployment YAMLs"
-   git push origin main
-   ```
+```bash
+git add .
+git commit -m "Adding all deployment YAMLs"
+git push origin main
+```
 
 ---
 
