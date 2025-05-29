@@ -55,7 +55,9 @@ git add make-namespace.yaml
 git status
 git commit -m "added test yaml file"
 git push origin main	
- ```
+```
+
+--- 
  
 ### Step 0.B – Setup DNS
 
