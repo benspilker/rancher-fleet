@@ -25,11 +25,13 @@ Tip: Right-click and open in a new tab for best experience.
 ### Step 0.A – Setup Local Git Repository
 
 # 1. Clone this repo
+```bash
 git clone https://github.com/benspilker/rancher-fleet.git
 cd rancher-fleet
 cd ..
 
 # 2. Create and initialize your own Git repo
+```bash
 mkdir new-repo && cd new-repo
 echo 'New Readme' > README.md
 git init
@@ -38,20 +40,18 @@ git commit -m "Initial commit"
 git branch -M main
 	
 # 3. Change your URL to match Github User
-    ```bash
+```bash
 git remote add origin https://github.com/youruser/new-repo.git
 git push -u origin main
-	```
 
 # 4. Manually copy your test file(s) as needed from rancher-fleet repo into your new folder
 
 # 5. Commit and push the test file(s) as needed
-    ```bash
+```bash
     git add make-namespace.yaml
     git status
     git commit -m "added test yaml file"
-    git push origin main
-	```	
+    git push origin main	
 
 ### Step 0.B – Setup DNS
 
