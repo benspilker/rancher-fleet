@@ -20,18 +20,18 @@ Tip: Right-click and open in a new tab for best experience.
 
 ---
 
-## Getting Started
+# Getting Started
 
-### Step 0.A – Setup Local Git Repository
+## Step 0.A – Setup Local Git Repository
 
-# 1. Clone this repo
+### 1. Clone this repo
 ```bash
 git clone https://github.com/benspilker/rancher-fleet.git
 cd rancher-fleet
 cd ..
 ```
  
-# 2. Create and initialize your own Git repo
+### 2. Create and initialize your own Git repo
 ```bash
 mkdir new-repo && cd new-repo
 echo 'New Readme' > README.md
@@ -41,15 +41,15 @@ git commit -m "Initial commit"
 git branch -M main
  ```
  
-# 3. Change your URL to match Github User
+### 3. Change your URL to match Github User
 ```bash
 git remote add origin https://github.com/youruser/new-repo.git
 git push -u origin main
  ```
  
-# 4. Manually copy your test file(s) as needed from rancher-fleet repo into your new folder
+### 4. Manually copy your test file(s) as needed from rancher-fleet repo into your new folder
 
-# 5. Commit and push the test file(s) as needed
+### 5. Commit and push the test file(s) as needed
 ```bash
 git add make-namespace.yaml
 git status
@@ -59,7 +59,7 @@ git push origin main
 
 --- 
  
-### Step 0.B – Setup DNS
+## Step 0.B – Setup DNS
 
 Ensure your domain (e.g. `nextcloud.yourexampledomain2.com`) points to the correct Ingress IP (e.g. `192.168.100.203`).
 
@@ -77,7 +77,7 @@ git push origin main
 
 ---
 
-## Deployment Overview
+# Deployment Overview
 
 The deployment uses seven YAML files, deployed in order (1 to 7). These YAMLs create a new namespace: `nextcloud2`.
 
@@ -101,7 +101,7 @@ Accessing Nextcloud before the config is set will result in a "trusted domain" e
 
 ---
 
-## Verify Deployment
+# Verify Deployment
 
 Check the generated `config.php`:
 
@@ -115,8 +115,6 @@ POD_NAME=$(kubectl get pods -n nextcloud2 --no-headers | grep -v maria | grep -v
 kubectl exec -it $POD_NAME -n nextcloud2 -- /bin/sh -c 'cat /var/www/html/config/config.php'
 ```
 
----
-
 ## Example Configuration
 
 ![Example Config](example-config.png)
@@ -125,7 +123,7 @@ kubectl exec -it $POD_NAME -n nextcloud2 -- /bin/sh -c 'cat /var/www/html/config
 
 ## Redeploy with Custom settings if desired
 
-# Persistent Volume Size Customization
+### Persistent Volume Size Customization
 
 Update the Gi size in these YAML files to customize their volume sizing:
 
@@ -135,7 +133,7 @@ Update the Gi size in these YAML files to customize their volume sizing:
 | `5-nextcloud-deploy.yaml` | Line 195	      |
 
 
-# Domain Name Customization
+### Domain Name Customization
 
 Update the domain in these YAML files if you use a different domain:
 
@@ -148,7 +146,7 @@ Update the domain in these YAML files if you use a different domain:
 Also make sure your DNS resolution is set correctly (See Step 0B if using a custom domain)
 ---
 
-## Final Result
+# Final Result
 
 You should now have a fully functioning Nextcloud instance with:
 
