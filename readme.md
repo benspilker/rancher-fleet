@@ -121,7 +121,7 @@ kubectl exec -it $POD_NAME -n nextcloud2 -- /bin/sh -c 'cat /var/www/html/config
 
 ---
 
-# Redeploy with Custom settings if desired
+# (Optional) Redeploy with Custom settings if desired
 
 ### Persistent Volume Size Customization
 
